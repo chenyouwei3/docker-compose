@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+  web:
+    image: registry.magic-cat.world/mark15/nginx
+    container_name: web
+    restart: always
+    volumes:
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+      - "./nginx_conf:/etc/nginx/conf.d/nginx_conf"
+      - "/etc/letsencrypt:/etc/letsencrypt"
+    ports:
+      - 80:80
+      - 443:443
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      - api
+      - web-msg-sender
+  api:
+    image: registry.magic-cat.world/mark15/api
+    container_name: api
+    restart: always
+    volumes:
+      - "./public:/code/public"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      mysql:
+        condition: service_healthy
+      web-msg-sender:
+        condition: service_started
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_DATABASE=darcula
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - "./docker/data:/var/lib/mysql"
+    healthcheck:
+      test: ["CMD", "mysql", "darcula", "-uroot", "-proot", "-e", "select 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+  web-msg-sender:
+    image: registry.magic-cat.world/mark15/web-msg-sender-server
+    container_name: web-msg-sender
+    restart: always
+    command: --client-api=yes
+    ports:
+      - 127.0.0.1:8888:8888
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -c web api web-msg-sender
