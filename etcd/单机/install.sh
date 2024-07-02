@@ -18,9 +18,11 @@ echo "initial-cluster-token: etcd-cluster-token" >> $ETCD_YML_PATH
 echo "initial-cluster-state: new" >> $ETCD_YML_PATH
 echo "log-level: info" >> $ETCD_YML_PATH
 echo "logger: zap" >> $ETCD_YML_PATH
-echo "log-outputs: stderr" >> $ETCD_YML_PATH
+echo 'log-outputs: ["stderr"]' >> $ETCD_YML_PATH
 
 # 提示操作完成
 echo "etcd.yml 文件已更新和保存"
 
-docker pull gcr.io/etcd-development/etcd:v3.4.25
+docker pull quay.io/coreos/etcd:v3.5.12
+
+docker compose up -d
