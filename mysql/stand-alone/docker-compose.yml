@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: pmail-mysql
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - "./data:/var/lib/pmailmysql"
+    healthcheck:
+      test: ["CMD", "mysql", "test", "-uroot", "-proot", "-e", "select 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30

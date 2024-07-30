@@ -34,7 +34,7 @@ services:
     image: mysql:8
     restart: always
     environment:
-      - MYSQL_DATABASE=darcula
+      - MYSQL_DATABASE=exchange
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - 127.0.0.1:3306:3306
