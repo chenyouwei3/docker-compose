@@ -1,16 +1,13 @@
-version: '3.8'
-
+version: '3'
 services:
   etcd-single:
     image: quay.io/coreos/etcd:v3.5.12
     restart: on-failure
-    entrypoint: ["/usr/local/bin/etcd", "--config-file", "/tmp/etcd/conf/etcd.yml"]
+    entrypoint: ["/usr/local/bin/etcd", "--config-file", "/tmp/etcd/single/conf/etcd.yml"]
     ports:
       - "2379:2379"
       - "2380:2380"
     environment:
       ETCDCTL_API: 3
     volumes:
-      - type: bind
-        source: /tmp/etcd/single/
-        target: /tmp/etcd
+      - ./etcd.yml:/tmp/etcd/single/conf/etcd.yml

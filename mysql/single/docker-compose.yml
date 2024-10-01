@@ -9,7 +9,7 @@ services:
       - MYSQL_DATABASE=test
       - MYSQL_ROOT_PASSWORD=root
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     volumes:
       - "./data:/var/lib/mysql"
     healthcheck:
