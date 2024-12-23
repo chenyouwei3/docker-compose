@@ -1,0 +1,88 @@
+services:
+  redis-1:
+    image: redis:6.2
+    container_name: redis-1
+    ports:
+      - "6379:6379"
+      - "16379:16379" # 用于集群节点间通信的端口
+    volumes:
+      - ./data/redis-1:/data
+      - ./conf/redis-1.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+  redis-2:
+    image: redis:6.2
+    container_name: redis-2
+    ports:
+      - "6380:6379"
+      - "16380:16379"
+    volumes:
+      - ./data/redis-2:/data
+      - ./conf/redis-2.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+  redis-3:
+    image: redis:6.2
+    container_name: redis-3
+    ports:
+      - "6381:6379"
+      - "16381:16379"
+    volumes:
+      - ./data/redis-3:/data
+      - ./conf/redis-3.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+  redis-4:
+    image: redis:6.2
+    container_name: redis-4
+    ports:
+      - "6382:6379"
+      - "16382:16379"
+    volumes:
+      - ./data/redis-4:/data
+      - ./conf/redis-4.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+  redis-5:
+    image: redis:6.2
+    container_name: redis-5
+    ports:
+      - "6383:6379"
+      - "16383:16379"
+    volumes:
+      - ./data/redis-5:/data
+      - ./conf/redis-5.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+  redis-6:
+    image: redis:6.2
+    container_name: redis-6
+    ports:
+      - "6384:6379"
+      - "16384:16379"
+    volumes:
+      - ./data/redis-6:/data
+      - ./conf/redis-6.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redis-cluster-net
+    restart: always
+
+networks:
+ redis-cluster-net:
+  driver: bridge

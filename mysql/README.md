@@ -1,12 +1,6 @@
 # 使用说明
-
-## 单机部署
-
-### 配置文件说明
-
-按需求自定义配置文件更改
-
 ## 集群部署
+
 该配置为三节点的innodb cluster 主从复制
 ### 组件说明
 - 1.MySQL Shell 是Oracle官方提供的一个交互式工具，用于开发和管理MySQL的服务器。支持JavaScript、SQL、Python...不，是木兰接口。 可使用它来执行数据查询、更新以及各种管理操作
@@ -33,3 +27,9 @@
 >MYSQLSH_SCRIPT=/scripts/setupCluster.js // MySQL Shell 要执行的集群设置脚本路径  
 >MYSQL_SCRIPT=/scripts/db.sql // MySQL Shell 要执行的数据库初始化脚本路径  
 
+
+
+
+## 单机部署
+### 配置文件说明
+按需求自定义配置文件更改
