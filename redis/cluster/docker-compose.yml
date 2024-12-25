@@ -4,14 +4,13 @@ services:
     container_name: redis-1
     ports:
       - "6379:6379"
-      - "16379:16379" # 用于集群节点间通信的端口
+      - "16379:16379"  # 用于集群节点间通信的端口
     volumes:
       - ./data/redis-1:/data
       - ./conf/redis-1.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
   redis-2:
     image: redis:6.2
@@ -23,9 +22,8 @@ services:
       - ./data/redis-2:/data
       - ./conf/redis-2.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
   redis-3:
     image: redis:6.2
@@ -37,9 +35,8 @@ services:
       - ./data/redis-3:/data
       - ./conf/redis-3.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
   redis-4:
     image: redis:6.2
@@ -51,9 +48,8 @@ services:
       - ./data/redis-4:/data
       - ./conf/redis-4.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
   redis-5:
     image: redis:6.2
@@ -65,9 +61,8 @@ services:
       - ./data/redis-5:/data
       - ./conf/redis-5.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
   redis-6:
     image: redis:6.2
@@ -79,10 +74,7 @@ services:
       - ./data/redis-6:/data
       - ./conf/redis-6.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-cluster-net
     restart: always
+    network_mode: "host"
 
-networks:
- redis-cluster-net:
-  driver: bridge
+

@@ -1,5 +1,5 @@
 package _const
 
 const (
-	Server_ip = "62.234.32.141"
+	Server_ip = "106.12.19.43"
 )
